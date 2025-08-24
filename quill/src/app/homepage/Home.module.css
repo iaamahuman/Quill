@@ -1,0 +1,168 @@
+/* --- PREVIOUS CSS (Mostly Unchanged) --- */
+
+:global(html),
+:global(body) {
+  margin: 0;
+  padding: 0;
+  background: #f9fbff;
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.homeWrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  width: 100vw;
+  background: #f9fbff;
+}
+
+/* Use a different class for the desktop-only sidebar */
+.sidebarDesktop {
+  background: #23395d;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100vh;
+  box-shadow: 2px 0 12px rgba(128, 84, 161, 0.08);
+}
+
+.mainContent {
+  padding: 2rem 2.5rem;
+  background: #fff;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Styles for list items, tags, buttons, cards, etc. remain the same */
+.sidebarTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.subjectList,
+.tagList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subjectItem {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  transition: background 0.2s;
+}
+
+.subjectItem:hover,
+.subjectItem.active {
+  background: #4a90e2;
+  color: #fff;
+}
+/* ... keep your other existing styles for card, tag, contributeBtn etc. */
+
+/* --- NEW RESPONSIVE & MOBILE-FIRST STYLES --- */
+
+/* Hide mobile-only elements on desktop */
+.menuToggle,
+.sidebar,
+.overlay,
+.closeBtn {
+  display: none;
+}
+
+
+/* --- Responsive Breakpoint --- */
+@media (max-width: 900px) {
+  /* Hide the desktop sidebar */
+  .sidebarDesktop {
+    display: none;
+  }
+
+  /* Adjust grid for a single column layout */
+  .homeWrapper {
+    grid-template-columns: 1fr;
+  }
+  .mainContent {
+    padding: 1.5rem;
+  }
+
+  /* Hamburger Menu Button */
+  .menuToggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001; /* Make sure it's on top */
+    background: #23395d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* Mobile Sidebar (Initially Hidden) */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px; /* Give it a fixed width */
+    height: 100%;
+    background: #23395d;
+    color: #fff;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+    z-index: 1000;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%); /* Start off-screen */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* State when sidebar is open */
+  .sidebarOpen {
+    transform: translateX(0); /* Slide in */
+  }
+
+  /* Header inside the mobile sidebar */
+  .sidebarHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+  }
+
+  .closeBtn {
+      display: block;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+  }
+
+  /* Overlay for dimming content */
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+}
